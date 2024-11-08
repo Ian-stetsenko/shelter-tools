@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { AddGameControlsComponent, TeamSize } from '../add-game-controls/add-game-controls.component';
 import { MatButtonModule } from '@angular/material/button';
 import { TeamCardsComponent } from '../team-cards/team-cards.component';
+import { AddPlayerComponent } from '../add-player/add-player.component';
 
 const PLAYERS_DATA: Player[] = [
   { position: 1, name: '2hard', score: 13 },
@@ -23,7 +24,8 @@ const PLAYERS_DATA: Player[] = [
     FormsModule,
     AddGameControlsComponent,
     MatButtonModule,
-    TeamCardsComponent
+    TeamCardsComponent,
+    AddPlayerComponent
   ],
   templateUrl: './add-game.component.html',
   styleUrl: './add-game.component.scss'
