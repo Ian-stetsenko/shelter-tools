@@ -5,6 +5,7 @@ import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/ma
 import { FormsModule } from '@angular/forms';
 import { AddGameControlsComponent, TeamSize } from '../add-game-controls/add-game-controls.component';
 import { MatButtonModule } from '@angular/material/button';
+import { TeamCardsComponent } from '../team-cards/team-cards.component';
 
 const PLAYERS_DATA: Player[] = [
   { position: 1, name: '2hard', score: 13 },
@@ -21,7 +22,8 @@ const PLAYERS_DATA: Player[] = [
     MatAutocompleteModule,
     FormsModule,
     AddGameControlsComponent,
-    MatButtonModule
+    MatButtonModule,
+    TeamCardsComponent
   ],
   templateUrl: './add-game.component.html',
   styleUrl: './add-game.component.scss'
@@ -40,7 +42,8 @@ export class AddGameComponent implements OnInit {
   })
 
   gameConfiguration = signal({
-    size: {}
+    size: {},
+    teams: []
   })
 
   ngOnInit(): void {
@@ -79,6 +82,10 @@ export class AddGameComponent implements OnInit {
       teams.push(team);
     }
 
-    console.log(teams);
+    this.gameConfiguration.update((config) => ({ ...config, teams }))
+  }
+
+  get teams(): Player[][] {
+    return this.gameConfiguration().teams
   }
 }

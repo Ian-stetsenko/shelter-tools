@@ -1,9 +1,3 @@
-<p>add-game works!</p>
-
-add players
-amount of teams
-team size (solo, duo, squad (3), squad)
-
 <section>
   <app-add-game-controls (teamSizeSelected)="teamSizeSelected($event)"></app-add-game-controls>
 </section>
@@ -31,4 +25,8 @@ team size (solo, duo, squad (3), squad)
 
 <section>
   <button (click)="splitIntoTeams()" mat-raised-button>Generate Teams</button>
+</section>
+
+<section>
+  <app-team-cards [teams]="teams"></app-team-cards>
 </section>
