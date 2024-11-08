@@ -1,0 +1,9 @@
+<mat-form-field>
+  <mat-label>Team Size</mat-label>
+  <mat-select (selectionChange)="select($event)">
+    <mat-option>None</mat-option>
+    @for (size of teamRules; track $index) {
+    <mat-option [value]="size">{{size.label}}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>

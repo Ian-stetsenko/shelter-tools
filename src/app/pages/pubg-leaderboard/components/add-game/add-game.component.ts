@@ -3,6 +3,7 @@ import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { Player } from '../../../../interfaces/pubg.interfaces';
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { FormsModule } from '@angular/forms';
+import { AddGameControlsComponent } from '../add-game-controls/add-game-controls.component';
 
 const PLAYERS_DATA: Player[] = [
   { position: 1, name: '2hard', score: 13 },
@@ -14,7 +15,12 @@ const PLAYERS_DATA: Player[] = [
 @Component({
   selector: 'app-add-game',
   standalone: true,
-  imports: [MatChipsModule, MatAutocompleteModule, FormsModule],
+  imports: [
+    MatChipsModule,
+    MatAutocompleteModule,
+    FormsModule,
+    AddGameControlsComponent
+  ],
   templateUrl: './add-game.component.html',
   styleUrl: './add-game.component.scss'
 })
