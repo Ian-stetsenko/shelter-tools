@@ -1,1 +1,30 @@
 <p>add-game works!</p>
+
+add players
+amount of teams
+team size (solo, duo, squad (3), squad)
+
+<section>
+
+</section>
+
+<section>
+  <mat-chip-listbox #chipListbox class="mat-mdc-chip-set-stacked" aria-label="Cutest dog breeds">
+    @for (player of selectedPlayers(); track player) {
+    <mat-chip-option selected selectable=false>{{player.name}}</mat-chip-option>
+    }
+    <input
+      name="currentPlayer"
+      placeholder="Add Player..."
+      class="w-full"
+      [(ngModel)]="currentPlayer"
+      [matAutocomplete]="auto"
+      (matChipInputTokenEnd)="add($event)"
+    />
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="autocompleteDisplayFn" (optionSelected)="playerSelected($event)">
+      @for (player of remainingPlayers(); track player) {
+      <mat-option [value]="player">{{player.name}}</mat-option>
+      }
+    </mat-autocomplete>
+  </mat-chip-listbox>
+</section>

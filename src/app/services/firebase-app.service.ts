@@ -17,7 +17,7 @@ const firebaseConfig = {
   providedIn: 'root'
 })
 export class FirebaseAppService {
-  private app: FirebaseApp;
+  private app!: FirebaseApp;
   private dbService = inject(FirestoreDbService)
 
   init(): void {

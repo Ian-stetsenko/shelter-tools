@@ -1,11 +1,6 @@
 import { Component } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-
-interface Player {
-  position: number
-  name: string
-  score: number
-}
+import { Player } from '../../../../interfaces/pubg.interfaces';
 
 const PLAYERS_DATA: Player[] = [
   { position: 1, name: '2hard', score: 13 },
