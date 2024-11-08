@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { Player } from '../../../../interfaces/pubg.interfaces';
 
@@ -17,6 +17,10 @@ const PLAYERS_DATA: Player[] = [
   styleUrl: './leaderboard-table.component.scss'
 })
 export class LeaderboardTableComponent {
+  @Input() set players(players: Player[]) {
+    this.dataSource.set(players);
+  }
+
   displayColumns = ['position', 'name', 'score'];
-  dataSource = PLAYERS_DATA;
+  dataSource = signal([]);
 }

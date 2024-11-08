@@ -1,4 +1,15 @@
-import { Component, computed, Input, model, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  EventEmitter,
+  Input,
+  model,
+  OnChanges,
+  OnInit,
+  Output,
+  signal,
+  SimpleChanges
+} from '@angular/core';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { Player } from '../../../../interfaces/pubg.interfaces';
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
@@ -31,8 +42,13 @@ const PLAYERS_DATA: Player[] = [
   styleUrl: './add-game.component.scss'
 })
 export class AddGameComponent implements OnInit {
-  @Input() players: Player[] = PLAYERS_DATA;
+  @Input() set playersList(players: Player[]) {
+    this.players.set(players);
+  }
 
+  @Output() playerAdded = new EventEmitter<Player>();
+
+  players = signal([]);
   selectedPlayers = signal([]);
   currentPlayer = model('');
   filteredPlayers = computed(() => {
@@ -40,7 +56,7 @@ export class AddGameComponent implements OnInit {
   })
 
   remainingPlayers = computed(() => {
-    return this.players.filter(player => !this.selectedPlayers().includes(player))
+    return this.players().filter(player => !this.selectedPlayers().includes(player))
   })
 
   gameConfiguration = signal({
@@ -89,5 +105,10 @@ export class AddGameComponent implements OnInit {
 
   get teams(): Player[][] {
     return this.gameConfiguration().teams
+  }
+
+  addPlayer(player: Player) {
+    this.selectedPlayers.update((players) => [...players, player]);
+    this.playerAdded.emit(player);
   }
 }

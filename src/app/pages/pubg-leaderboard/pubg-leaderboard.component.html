@@ -1,3 +1,3 @@
-<app-leaderboard-table></app-leaderboard-table>
-
-<app-add-game></app-add-game>
+<app-leaderboard-table [players]="players()"></app-leaderboard-table>
+<button mat-raised-button (click)="loadPlayers()">Load Players</button>
+<app-add-game [playersList]="players()" (playerAdded)="addNewPlayer($event)"></app-add-game>

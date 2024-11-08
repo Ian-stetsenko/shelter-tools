@@ -43,13 +43,16 @@ export class AddPlayerFormComponent {
   createNewPlayer() {
     this.isLoading = true;
 
-    this.dbService.addPlayer({
+    const newPlayer = {
       name: this.name(),
       score: 0,
       position: 999
-    }).subscribe(() => {
-      this.isLoading = false;
-      this.dialogRef.close();
-    })
+    }
+
+    this.dbService.addPlayer(newPlayer)
+      .subscribe(() => {
+        this.isLoading = false;
+        this.dialogRef.close(newPlayer);
+      })
   }
 }

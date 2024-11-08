@@ -40,7 +40,7 @@ export class TeamCardsComponent implements OnChanges {
 
     const pubgItems = [
       'AWM', 'Pan', 'Kar98', 'M416', 'Molotov', 'Level 3 Helmet',
-      'First Aid Kit', 'Smoke Grenade', 'UMP45', 'S12K', 'Tommy Gun',
+      'First Aid Kit', 'Smoke Grenade', 'UMP', 'Tommy Gun',
       'Frag Grenade', 'Groza', '8x Scope', 'Flare Gun', 'Backpack',
       'Ghillie Suit', 'Energy Drink', 'Crossbow', 'Red Zone Survivors', 'Noob Squad',
       'Chicken Eaters', 'Grass Snakes'
