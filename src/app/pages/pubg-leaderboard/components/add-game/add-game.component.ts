@@ -3,7 +3,8 @@ import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { Player } from '../../../../interfaces/pubg.interfaces';
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { FormsModule } from '@angular/forms';
-import { AddGameControlsComponent } from '../add-game-controls/add-game-controls.component';
+import { AddGameControlsComponent, TeamSize } from '../add-game-controls/add-game-controls.component';
+import { MatButtonModule } from '@angular/material/button';
 
 const PLAYERS_DATA: Player[] = [
   { position: 1, name: '2hard', score: 13 },
@@ -19,7 +20,8 @@ const PLAYERS_DATA: Player[] = [
     MatChipsModule,
     MatAutocompleteModule,
     FormsModule,
-    AddGameControlsComponent
+    AddGameControlsComponent,
+    MatButtonModule
   ],
   templateUrl: './add-game.component.html',
   styleUrl: './add-game.component.scss'
@@ -35,6 +37,10 @@ export class AddGameComponent implements OnInit {
 
   remainingPlayers = computed(() => {
     return this.players.filter(player => !this.selectedPlayers().includes(player))
+  })
+
+  gameConfiguration = signal({
+    size: {}
   })
 
   ngOnInit(): void {
@@ -53,5 +59,26 @@ export class AddGameComponent implements OnInit {
 
   add($event: MatChipInputEvent) {
     this.currentPlayer.set('');
+  }
+
+  teamSizeSelected(size: TeamSize): void {
+    this.gameConfiguration.update((config) => ({ ...config, size }));
+  }
+
+  splitIntoTeams(): void {
+    const shuffledPlayers = [...this.selectedPlayers()];
+    for (let i = shuffledPlayers.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledPlayers[i], shuffledPlayers[j]] = [shuffledPlayers[j], shuffledPlayers[i]];
+    }
+
+    const teams = [];
+    const { size: teamSize } = this.gameConfiguration().size as TeamSize;
+    for (let i = 0; i < shuffledPlayers.length; i += teamSize) {
+      const team = shuffledPlayers.slice(i, i + teamSize);
+      teams.push(team);
+    }
+
+    console.log(teams);
   }
 }

@@ -5,7 +5,7 @@ amount of teams
 team size (solo, duo, squad (3), squad)
 
 <section>
-  <app-add-game-controls></app-add-game-controls>
+  <app-add-game-controls (teamSizeSelected)="teamSizeSelected($event)"></app-add-game-controls>
 </section>
 
 <section>
@@ -27,4 +27,8 @@ team size (solo, duo, squad (3), squad)
       }
     </mat-autocomplete>
   </mat-chip-listbox>
+</section>
+
+<section>
+  <button (click)="splitIntoTeams()" mat-raised-button>Generate Teams</button>
 </section>
