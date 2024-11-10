@@ -1,5 +1,5 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Player } from '../../../../interfaces/pubg.interfaces';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Player, TeamsConfiguration } from '../../../../interfaces/pubg.interfaces';
 import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
@@ -14,11 +14,18 @@ import { MatCardModule } from '@angular/material/card';
 export class TeamCardsComponent implements OnChanges {
   @Input() teams: Player[][];
 
-  teamNames = []
+  @Output() teamsConfigUpdated = new EventEmitter<TeamsConfiguration>();
+
+  teamNames = [];
 
   ngOnChanges(changes: SimpleChanges) {
     console.log(changes);
     this.generateTeamNames();
+
+    this.teamsConfigUpdated.emit({
+      teams: this.teams,
+      teamNames: this.teamNames
+    })
   }
 
   generatePUBGTeamName(): string {

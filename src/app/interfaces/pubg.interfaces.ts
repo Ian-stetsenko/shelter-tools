@@ -3,3 +3,8 @@ export interface Player {
   name: string
   score: number
 }
+
+export interface TeamsConfiguration {
+  teams: Player[][];
+  teamNames: string[];
+}

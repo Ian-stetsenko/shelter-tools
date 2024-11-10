@@ -11,13 +11,14 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
-import { Player } from '../../../../interfaces/pubg.interfaces';
+import { Player, TeamsConfiguration } from '../../../../interfaces/pubg.interfaces';
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { FormsModule } from '@angular/forms';
 import { AddGameControlsComponent, TeamSize } from '../add-game-controls/add-game-controls.component';
 import { MatButtonModule } from '@angular/material/button';
 import { TeamCardsComponent } from '../team-cards/team-cards.component';
 import { AddPlayerComponent } from '../add-player/add-player.component';
+import { GameResultsComponent } from '../game-results/game-results.component';
 
 const PLAYERS_DATA: Player[] = [
   { position: 1, name: '2hard', score: 13 },
@@ -36,7 +37,8 @@ const PLAYERS_DATA: Player[] = [
     AddGameControlsComponent,
     MatButtonModule,
     TeamCardsComponent,
-    AddPlayerComponent
+    AddPlayerComponent,
+    GameResultsComponent
   ],
   templateUrl: './add-game.component.html',
   styleUrl: './add-game.component.scss'
@@ -51,6 +53,8 @@ export class AddGameComponent implements OnInit {
   players = signal([]);
   selectedPlayers = signal([]);
   currentPlayer = model('');
+  teamsConfig = signal<TeamsConfiguration>({} as TeamsConfiguration)
+
   filteredPlayers = computed(() => {
     const currentPlayer = this.currentPlayer().toLowerCase();
   })
@@ -110,5 +114,9 @@ export class AddGameComponent implements OnInit {
   addPlayer(player: Player) {
     this.selectedPlayers.update((players) => [...players, player]);
     this.playerAdded.emit(player);
+  }
+
+  updateTeamsConfig(config: TeamsConfiguration) {
+    this.teamsConfig.set(config);
   }
 }

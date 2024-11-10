@@ -29,5 +29,9 @@
 </section>
 
 <section>
-  <app-team-cards [teams]="teams"></app-team-cards>
+  <app-team-cards [teams]="teams" (teamsConfigUpdated)="updateTeamsConfig($event)"></app-team-cards>
+</section>
+
+<section>
+  <app-game-results [teams]="teamsConfig()"></app-game-results>
 </section>
