@@ -1,19 +1,18 @@
-<mat-stepper linear #stepper>
-  <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Fill out your name</ng-template>
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput formControlName="firstCtrl" placeholder="Last name, First name" required>
-      </mat-form-field>
-      <div>
+<mat-stepper linear #stepper class="h-full">
+
+  <mat-step [stepControl]="firstFormGroup" [editable]="isEditable" class="h-full">
+    <form [formGroup]="firstFormGroup" class="h-full">
+      <ng-template matStepLabel>Add Players</ng-template>
+      <app-pubg-game-step-1></app-pubg-game-step-1>
+      <div class="w-full flex justify-end items-end">
         <button mat-button matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
+
   <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
     <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out your address</ng-template>
+      <ng-template matStepLabel>Create Teams</ng-template>
       <mat-form-field>
         <mat-label>Address</mat-label>
         <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
@@ -25,12 +24,14 @@
       </div>
     </form>
   </mat-step>
+
   <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
+    <ng-template matStepLabel>Game</ng-template>
     <p>You are now done.</p>
     <div>
       <button mat-button matStepperPrevious>Back</button>
       <button mat-button (click)="stepper.reset()">Reset</button>
     </div>
   </mat-step>
+
 </mat-stepper>

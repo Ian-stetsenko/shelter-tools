@@ -1,1 +1,34 @@
-<p>pubg-game-step-1 works!</p>
+<section class="h-full">
+  <section class="flex flex-row items-end justify-end w-full mb-4">
+    <button class="mr-2" mat-raised-button (click)="loadPlayers()">Load Players</button>
+    <app-add-player (playerAdded)="addPlayer($event)"></app-add-player>
+  </section>
+
+  <section class="">
+    <section class="mb-4 w-[350px]">
+      <mat-chip-listbox #chipListbox class="mat-mdc-chip-set-stacked" aria-label="Cutest dog breeds">
+        @for (player of selectedPlayers(); track player) {
+        <mat-chip-option selected selectable=false (click)=deselectPlayer(player)>{{player.name}}</mat-chip-option>
+        }
+      </mat-chip-listbox>
+    </section>
+
+    <section *ngIf="players().length">
+      <input
+        matInput
+        name="currentPlayer"
+        placeholder="Click to choose players..."
+        class="w-[350px]"
+        [(ngModel)]="currentPlayer"
+        [matAutocomplete]="auto"
+        (matChipInputTokenEnd)="add($event)"
+      />
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="autocompleteDisplayFn" (optionSelected)="playerSelected($event)">
+        @for (player of remainingPlayers(); track player) {
+        <mat-option [value]="player">{{player.name}}</mat-option>
+        }
+      </mat-autocomplete>
+    </section>
+  </section>
+
+</section>
