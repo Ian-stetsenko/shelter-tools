@@ -31,7 +31,7 @@ export class PubgGameStepperComponent {
   });
 
   gameControls = this._formBuilder.group({
-    selectedPlayers: [],
+    selectedPlayers: [[], Validators.required],
     teams: []
   })
 }

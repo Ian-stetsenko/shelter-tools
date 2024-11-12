@@ -45,12 +45,6 @@ export class PubgGameStep1Component {
     return this.players().filter(player => !this.selectedPlayers().includes(player))
   })
 
-  playersSelectionChanged = computed(() => {
-    const selectedPlayers = this.selectedPlayers();
-
-    this.playersSelected.emit(selectedPlayers);
-  })
-
   add($event: MatChipInputEvent) {
     this.currentPlayer.set('');
   }
@@ -63,11 +57,15 @@ export class PubgGameStep1Component {
     this.selectedPlayers.update(players =>  [...players, option.value ]);
     this.currentPlayer.set('');
     option.deselect();
+
+    this.playersSelected.emit(this.selectedPlayers());
   }
 
   addPlayer(player: Player) {
     this.selectedPlayers.update((players) => [...players, player]);
     this.playerAdded.emit(player);
+
+    this.playersSelected.emit(this.selectedPlayers());
   }
 
   loadPlayers(): void {
@@ -81,5 +79,7 @@ export class PubgGameStep1Component {
         (selectedPlayer : Player) => selectedPlayer.id !== playerToDeselect.id
       )
     )
+
+    this.playersSelected.emit(this.selectedPlayers());
   }
 }
