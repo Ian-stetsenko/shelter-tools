@@ -1,13 +1,11 @@
 <mat-stepper linear #stepper class="h-full">
 
-  <mat-step [stepControl]="firstFormGroup" [editable]="isEditable" class="h-full">
-    <form [formGroup]="firstFormGroup" class="h-full">
-      <ng-template matStepLabel>Add Players</ng-template>
-      <app-pubg-game-step-1></app-pubg-game-step-1>
-      <div class="w-full flex justify-end items-end">
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
+  <mat-step [stepControl]="gameControls.controls['selectedPlayers']" [editable]="isEditable" class="h-full">
+    <ng-template matStepLabel>Add Players</ng-template>
+    <app-step-1-cva-wrapper [formControl]="gameControls.controls['selectedPlayers']"></app-step-1-cva-wrapper>
+    <div class="w-full flex justify-end items-end">
+      <button mat-button matStepperNext>Next</button>
+    </div>
   </mat-step>
 
   <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">

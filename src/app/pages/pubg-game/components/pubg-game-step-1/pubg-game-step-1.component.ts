@@ -1,4 +1,4 @@
-import { Component, computed, EventEmitter, inject, model, Output, signal } from '@angular/core';
+import { Component, computed, EventEmitter, inject, Input, model, Output, signal } from '@angular/core';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { Player } from '../../../../interfaces/pubg.interfaces';
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
@@ -23,7 +23,13 @@ import { CommonModule } from '@angular/common';
   styleUrl: './pubg-game-step-1.component.scss'
 })
 export class PubgGameStep1Component {
+  @Input() set playersList(players) {
+    this.selectedPlayers.set(players);
+    this.players.set(players);
+  }
+
   @Output() playerAdded = new EventEmitter<Player>();
+  @Output() playersSelected = new EventEmitter<Player[]>()
 
   db = inject(FirestoreDbService);
 
@@ -37,6 +43,12 @@ export class PubgGameStep1Component {
 
   remainingPlayers = computed(() => {
     return this.players().filter(player => !this.selectedPlayers().includes(player))
+  })
+
+  playersSelectionChanged = computed(() => {
+    const selectedPlayers = this.selectedPlayers();
+
+    this.playersSelected.emit(selectedPlayers);
   })
 
   add($event: MatChipInputEvent) {
