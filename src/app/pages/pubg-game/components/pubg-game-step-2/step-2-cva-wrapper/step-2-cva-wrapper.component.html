@@ -1,0 +1,16 @@
+<section class="text-center">
+  <p>Please select team size</p>
+
+  <section class="flex flex-row items-center justify-center">
+    @for (size of teamSizes; track $index) {
+      <mat-card
+        appearance="outlined"
+        class="m-2 w-[150px] h-[225px] flex items-center justify-end cursor-pointer hover:scale-105"
+        [ngClass]="{'selected': selectedConfiguration() === size}"
+        (click)=teamSizeSelected(size)
+        >
+        <mat-card-content>{{ size.label }}</mat-card-content>
+      </mat-card>
+    }
+  </section>
+</section>

@@ -8,19 +8,15 @@
     </div>
   </mat-step>
 
-  <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Create Teams</ng-template>
-      <mat-form-field>
-        <mat-label>Address</mat-label>
-        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-               required>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
+  <mat-step [stepControl]="gameControls.controls['teamSize']" [editable]="isEditable">
+    <ng-template matStepLabel>Select Team Size</ng-template>
+
+    <app-step-2-cva-wrapper [formControl]="gameControls.controls['teamSize']"></app-step-2-cva-wrapper>
+
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
   </mat-step>
 
   <mat-step>
