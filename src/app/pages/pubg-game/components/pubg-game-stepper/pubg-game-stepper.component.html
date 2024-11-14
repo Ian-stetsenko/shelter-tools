@@ -1,4 +1,4 @@
-<mat-stepper linear #stepper class="h-full">
+<mat-stepper linear #stepper [animationDuration]="0" class="h-full">
 
   <mat-step [stepControl]="gameControls.controls['selectedPlayers']" [editable]="isEditable" class="h-full">
     <ng-template matStepLabel>Add Players</ng-template>

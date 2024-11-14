@@ -2,12 +2,12 @@
 
 </section>
 
-<section class="flex flex-row flex-wrap flex-wrap">
+<section class="grid grid-cols-5">
   @for (team of teams; track $index) {
     <mat-card appearance="raised" class="m-2 w-[250px]">
 
       <mat-card-header>
-        <mat-card-title> #{{ team.placement }} Team {{ team.name }}</mat-card-title>
+        <p class="text-xl h-[56px]"> #{{ team.placement }} Team {{ team.name }}</p>
       </mat-card-header>
 
       <mat-card-content>

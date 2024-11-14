@@ -44,7 +44,7 @@ export class PubgGameStep3Component implements ControlValueAccessor, OnChanges {
   }
 
   splitIntoTeams(): void {
-    const shuffledPlayers = [...this.players];
+    const shuffledPlayers = [...this?.players];
 
     for (let i = shuffledPlayers.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
