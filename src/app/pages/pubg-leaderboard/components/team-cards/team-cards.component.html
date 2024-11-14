@@ -2,17 +2,17 @@
 
 </section>
 
-<section class="flex flex-row flex-wrap">
+<section class="flex flex-row flex-wrap flex-wrap">
   @for (team of teams; track $index) {
-    <mat-card appearance="outlined" class="m-2">
+    <mat-card appearance="raised" class="m-2 w-[250px]">
 
       <mat-card-header>
-        <mat-card-title>Team {{ teamNames[$index] }}</mat-card-title>
+        <mat-card-title>Team {{ team.name }}</mat-card-title>
       </mat-card-header>
 
       <mat-card-content>
         <mat-chip-listbox>
-          @for (player of team; track player) {
+          @for (player of team.players; track player) {
             <mat-chip>{{ player.name }}</mat-chip>
           }
         </mat-chip-listbox>

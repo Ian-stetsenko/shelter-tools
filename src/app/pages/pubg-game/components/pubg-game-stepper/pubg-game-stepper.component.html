@@ -13,7 +13,22 @@
 
     <app-step-2-cva-wrapper [formControl]="gameControls.controls['teamSize']"></app-step-2-cva-wrapper>
 
-    <div>
+    <div class="w-full flex justify-end items-end">
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Generate Teams</ng-template>
+
+    <app-pubg-game-step-3
+      [formControl]="gameControls.controls['teams']"
+      [players]="gameControls.controls['selectedPlayers']?.value"
+      [teamSize]="gameControls.controls['teamSize']?.value['size']">
+    </app-pubg-game-step-3>
+
+    <div class="w-full flex justify-end items-end">
       <button mat-button matStepperPrevious>Back</button>
       <button mat-button matStepperNext>Next</button>
     </div>
@@ -24,7 +39,7 @@
     <p>You are now done.</p>
     <div>
       <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-button (click)="reset(stepper)">Reset</button>
     </div>
   </mat-step>
 

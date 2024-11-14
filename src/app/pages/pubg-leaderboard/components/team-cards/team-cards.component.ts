@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { Player, TeamsConfiguration } from '../../../../interfaces/pubg.interfaces';
+import { Player, PUBGTeam, TeamsConfiguration } from '../../../../interfaces/pubg.interfaces';
 import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
@@ -12,20 +12,14 @@ import { MatCardModule } from '@angular/material/card';
   styleUrl: './team-cards.component.scss'
 })
 export class TeamCardsComponent implements OnChanges {
-  @Input() teams: Player[][];
+  @Input() teams: PUBGTeam[];
 
-  @Output() teamsConfigUpdated = new EventEmitter<TeamsConfiguration>();
-
-  teamNames = [];
+  @Output() teamsConfigUpdated = new EventEmitter<PUBGTeam[]>();
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
     this.generateTeamNames();
 
-    this.teamsConfigUpdated.emit({
-      teams: this.teams,
-      teamNames: this.teamNames
-    })
+    this.teamsConfigUpdated.emit(this.teams)
   }
 
   generatePUBGTeamName(): string {
@@ -80,6 +74,6 @@ export class TeamCardsComponent implements OnChanges {
   }
 
   private generateTeamNames(): void {
-    this.teamNames = this.teams.map(() => this.generatePUBGTeamName());
+    this.teams.map((team: PUBGTeam) => team.name = this.generatePUBGTeamName());
   }
 }
