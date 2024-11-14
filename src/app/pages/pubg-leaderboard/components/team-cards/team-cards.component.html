@@ -11,17 +11,26 @@
       </mat-card-header>
 
       <mat-card-content>
-        <mat-chip-listbox #chipListbox class="mat-mdc-chip-set-stacked">
-          @for (player of team.players; track player) {
-            <mat-chip>{{ player.name }}</mat-chip>
-          }
-        </mat-chip-listbox>
+        <section class="mb-2">
+          <span class="inline-block mr-[8px]">Score: {{ team.score }}</span>
+          <span>Kills: {{ team.kills }}</span>
+        </section>
+
+       <section>
+         @for (player of team.players; track player) {
+          <p class="w-[50%]">
+            {{ player.name }}
+            <span class="inline-block mr-[8px]">Score: {{ player.score }}</span>
+            <span>Kills: {{ player.kills }}</span>
+          </p>
+        }
+       </section>
 
       </mat-card-content>
 
-      <mat-card-actions>
-        <button mat-button>Learn More</button>
-      </mat-card-actions>
+<!--      <mat-card-actions>-->
+<!--        <button mat-button>View players stats → </button>-->
+<!--      </mat-card-actions>-->
 
     </mat-card>
   }

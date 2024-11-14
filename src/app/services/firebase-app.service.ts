@@ -3,6 +3,7 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { FirebaseApp } from '@firebase/app';
 import { FirestoreDbService } from './firestore-db.service';
+import { PubgApiService } from './pubg-api.service';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDaJY0ZlB0_ZcdIw7iPTNQjD4mrh6i8ifo",
@@ -18,11 +19,13 @@ const firebaseConfig = {
 })
 export class FirebaseAppService {
   private app!: FirebaseApp;
-  private dbService = inject(FirestoreDbService)
+  private dbService = inject(FirestoreDbService);
+  private pubgApiService = inject(PubgApiService)
 
   init(): void {
     this.app = initializeApp(firebaseConfig);
     this.dbService.init(this.application);
+    //this.pubgApiService.init();
   }
 
   get application(): FirebaseApp {

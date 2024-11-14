@@ -46,7 +46,8 @@ export class AddPlayerFormComponent {
     const newPlayer = {
       name: this.name(),
       score: 0,
-      position: 999
+      position: 999,
+      pubgAccountId: ''
     }
 
     this.dbService.addPlayer(newPlayer)

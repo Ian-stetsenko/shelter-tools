@@ -1,12 +1,13 @@
 import { inject, Injectable } from '@angular/core';
 import { FirebaseApp } from '@firebase/app';
-import { getFirestore, collection, getDocs, addDoc, setDoc, doc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, addDoc, setDoc, doc, getDoc } from 'firebase/firestore';
 import { Firestore } from '@firebase/firestore';
-import { from, map, Observable } from 'rxjs';
+import { from, map, Observable, tap } from 'rxjs';
 import { Player } from '../interfaces/pubg.interfaces';
 
 enum PUBG_COLLECTIONS {
-  Players = 'shelter_pubg_players'
+  Players = 'shelter_pubg_players',
+  API_KEY = 'pubg_api_key'
 }
 
 @Injectable({
@@ -15,8 +16,11 @@ enum PUBG_COLLECTIONS {
 export class FirestoreDbService {
   private db!: Firestore
 
+
   init(app: FirebaseApp): void {
     this.db = getFirestore(app);
+
+    this.getPubgAPIKey().subscribe();
   }
 
   getPlayers(): Observable<Player[]> {
@@ -51,6 +55,16 @@ export class FirestoreDbService {
     } catch (e) {
       return e;
     }
+  }
+
+  getPubgAPIKey(): Observable<string> {
+    return from(
+      getDoc(
+        doc(this.db, PUBG_COLLECTIONS.API_KEY, 'NO7mK97pMxc51YlT9TnY')
+      )
+    ).pipe(
+      map((doc) => doc.data()['key'])
+    ) as any
   }
 
   private generateId(): number {
