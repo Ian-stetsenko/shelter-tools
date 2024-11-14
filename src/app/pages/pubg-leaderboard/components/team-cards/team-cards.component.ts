@@ -74,6 +74,6 @@ export class TeamCardsComponent implements OnChanges {
   }
 
   private generateTeamNames(): void {
-    this.teams.map((team: PUBGTeam) => team.name = this.generatePUBGTeamName());
+    this.teams.map((team: PUBGTeam) => team.name = team.name || this.generatePUBGTeamName());
   }
 }

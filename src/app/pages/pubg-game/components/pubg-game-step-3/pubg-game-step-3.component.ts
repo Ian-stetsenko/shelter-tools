@@ -58,7 +58,7 @@ export class PubgGameStep3Component implements ControlValueAccessor, OnChanges {
       const teamModel = new PubgTeam();
 
       teamModel.players = team;
-      teamModel.placement = team.length;
+      teamModel.placement = teams.length + 1;
 
       teams.push(teamModel);
     }
