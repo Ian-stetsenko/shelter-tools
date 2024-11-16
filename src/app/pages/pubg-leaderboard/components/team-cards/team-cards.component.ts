@@ -16,7 +16,9 @@ export class TeamCardsComponent implements OnChanges {
 
   @Output() teamsConfigUpdated = new EventEmitter<PUBGTeam[]>();
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges({ teams }: SimpleChanges) {
+    if(!teams?.currentValue?.length) return
+
     this.generateTeamNames();
 
     this.teamsConfigUpdated.emit(this.teams)

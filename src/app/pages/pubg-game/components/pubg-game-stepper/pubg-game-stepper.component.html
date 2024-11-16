@@ -1,6 +1,6 @@
 <mat-stepper linear #stepper [animationDuration]="0" class="h-full">
 
-  <mat-step [stepControl]="gameControls.controls['selectedPlayers']" [editable]="isEditable" class="h-full">
+  <mat-step [stepControl]="gameControls.controls['selectedPlayers']" [editable]="false" class="h-full">
     <ng-template matStepLabel>Add Players</ng-template>
     <app-step-1-cva-wrapper [formControl]="gameControls.controls['selectedPlayers']"></app-step-1-cva-wrapper>
     <div class="w-full flex justify-end items-end">
@@ -11,22 +11,30 @@
   <mat-step [stepControl]="gameControls.controls['teamSize']" [editable]="isEditable">
     <ng-template matStepLabel>Select Team Size</ng-template>
 
-    <app-step-2-cva-wrapper [formControl]="gameControls.controls['teamSize']"></app-step-2-cva-wrapper>
+    <section class="h-[500px]">
 
-    <div class="w-full flex justify-end items-end">
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button matStepperNext>Next</button>
-    </div>
+      <ng-template matStepContent>
+        <app-step-2-cva-wrapper [formControl]="gameControls.controls['teamSize']"></app-step-2-cva-wrapper>
+
+        <div class="w-full flex justify-end items-end">
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </ng-template>
+
+    </section>
   </mat-step>
 
   <mat-step>
     <ng-template matStepLabel>Generate Teams</ng-template>
 
-    <app-pubg-game-step-3
-      [formControl]="gameControls.controls['teams']"
-      [players]="gameControls.controls['selectedPlayers']?.value"
-      [teamSize]="gameControls.controls['teamSize']?.value['size']">
-    </app-pubg-game-step-3>
+    <ng-template matStepContent>
+      <app-pubg-game-step-3
+        [formControl]="gameControls.controls['teams']"
+        [players]="gameControls.controls['selectedPlayers']?.value"
+        [teamSize]="gameControls.controls['teamSize']?.value['size']">
+      </app-pubg-game-step-3>
+    </ng-template>
 
     <div class="w-full flex justify-end items-end">
       <button mat-button matStepperPrevious>Back</button>
@@ -36,7 +44,11 @@
 
   <mat-step>
     <ng-template matStepLabel>Game</ng-template>
-    <p>You are now done.</p>
+
+    <ng-template matStepContent>
+      <app-pubg-game [teams]="gameControls.controls['teams']['valueChanges'] | async"></app-pubg-game>
+    </ng-template>
+
     <div>
       <button mat-button matStepperPrevious>Back</button>
       <button mat-button (click)="reset(stepper)">Reset</button>

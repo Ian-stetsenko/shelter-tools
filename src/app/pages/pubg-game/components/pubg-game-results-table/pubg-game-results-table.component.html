@@ -1,1 +1,28 @@
-<p>pubg-game-results-table works!</p>
+<table mat-table [dataSource]="match.participants" class="mat-elevation-z8 demo-table">
+  <!-- Position Column -->
+  <ng-container matColumnDef="demo-position">
+    <th mat-header-cell *matHeaderCellDef> Team </th>
+    <td mat-cell *matCellDef="let participant"> {{participant.teamName}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="demo-name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let participant"> {{participant.name}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="demo-weight">
+    <th mat-header-cell *matHeaderCellDef> Kills </th>
+    <td mat-cell *matCellDef="let participant"> {{participant.kills}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="demo-symbol">
+    <th mat-header-cell *matHeaderCellDef> Rank </th>
+    <td mat-cell *matCellDef="let participant"> {{participant.placement}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="visibleColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: visibleColumns;"></tr>
+</table>

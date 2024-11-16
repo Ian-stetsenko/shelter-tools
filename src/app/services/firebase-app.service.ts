@@ -25,7 +25,7 @@ export class FirebaseAppService {
   init(): void {
     this.app = initializeApp(firebaseConfig);
     this.dbService.init(this.application);
-    //this.pubgApiService.init();
+    this.pubgApiService.init();
   }
 
   get application(): FirebaseApp {

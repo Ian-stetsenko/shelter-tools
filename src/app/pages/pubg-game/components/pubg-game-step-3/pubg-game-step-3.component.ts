@@ -18,7 +18,7 @@ import { PubgTeam } from '../../../../models/pubg-team';
 })
 export class PubgGameStep3Component implements ControlValueAccessor, OnChanges {
   @Input() players: Player[];
-  @Input() teamSize = 1;
+  @Input() teamSize: number;
 
   teams = signal<PUBGTeam[]>([]);
 
@@ -26,7 +26,7 @@ export class PubgGameStep3Component implements ControlValueAccessor, OnChanges {
   touched: Function
 
   ngOnChanges({ players, teamSize }: SimpleChanges = {}) {
-    if (players || teamSize) {
+    if (players?.currentValue?.length || teamSize?.currentValue) {
       this.splitIntoTeams();
     }
   }

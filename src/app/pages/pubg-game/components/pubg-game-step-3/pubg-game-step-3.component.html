@@ -2,4 +2,4 @@
 
 </section>
 
-<app-team-cards [teams]="teams()" (teamsConfigUpdated)="updateTeamsConfig($event)"></app-team-cards>
+<app-team-cards *ngIf="teams()?.length" [teams]="teams()" (teamsConfigUpdated)="updateTeamsConfig($event)"></app-team-cards>

@@ -19,8 +19,6 @@ export class FirestoreDbService {
 
   init(app: FirebaseApp): void {
     this.db = getFirestore(app);
-
-    this.getPubgAPIKey().subscribe();
   }
 
   getPlayers(): Observable<Player[]> {
