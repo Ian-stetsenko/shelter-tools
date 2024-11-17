@@ -17,6 +17,7 @@ import { PubgTeam } from '../../../../models/pubg-team';
   styleUrl: './pubg-game-step-3.component.scss'
 })
 export class PubgGameStep3Component implements ControlValueAccessor, OnChanges {
+  // TODO: Fix cards not rendering with lazy load component
   @Input() players: Player[];
   @Input() teamSize: number;
 
